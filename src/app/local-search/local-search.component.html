@@ -1,0 +1,21 @@
+<form>
+    <mat-list #localSearch>
+        <mat-list-item *ngFor='let input of inputs'>
+            <mat-form-field>
+                <input (focus)="updateOptions()" [formControl]="input"
+                 type="text" matInput [matAutocomplete]="auto">
+              </mat-form-field>
+              <button mat-icon-button	 (click)="remove(input)"><mat-icon>cancel</mat-icon></button>	
+              <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+                </mat-autocomplete>
+        </mat-list-item>
+
+    </mat-list>
+      
+      <div class="add-button"><button mat-mini-fab color="primary" (click)="add()"><mat-icon>add</mat-icon></button></div>	
+      <div *ngIf="inputs.length > 0" class="search-controls">
+        <button mat-button color="primary" (click)="search('OR')" value="OR">Search All</button>
+        <button mat-button  (click)="search('AND')" value="AND">Intersect Results</button>
+      </div>
+</form>
