@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { PersistenceService } from './persistence.service';
-import { SearchResult } from './shared/search-result';
+import { SearchResult } from '../shared/search-result';
 
 describe('PersistanceService', () => {
   let mockStorage = [];

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, Output, EventEmitter } from '@angular/core';
-import { PersistenceService } from '../persistence.service';
+import { PersistenceService } from '../services/persistence.service';
 import { FormControl } from '@angular/forms';
 import { SearchResult } from '../shared/search-result';
 import { Image } from '../shared/image';

@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { ImageSearchService } from '../image-search.service';
+import { ImageSearchService } from '../services/image-search.service';
 import { SearchResult } from '../shared/search-result';
 import { FormControl } from '@angular/forms';
-import { PersistenceService } from '../persistence.service';
+import { PersistenceService } from '../services/persistence.service';
 import { debounceTime, distinctUntilChanged, switchMap, startWith, map } from 'rxjs/operators';
 
 @Component({
