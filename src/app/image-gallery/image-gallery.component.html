@@ -9,8 +9,7 @@
               Type to search images from flickr api
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <app-search [scrollEvent] = 'eventsSubject.asObservable()'  
-          (onSearchResults)='updateResults($event)'></app-search>
+          <app-search (onSearchResults)='updateResults($event)' #searchControl></app-search>
         </mat-expansion-panel> 
         <mat-expansion-panel>
             <mat-expansion-panel-header>

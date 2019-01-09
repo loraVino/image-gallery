@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Image } from '../shared/image';
 import { SearchResult } from '../shared/search-result';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-image-gallery',
@@ -9,15 +10,15 @@ import { Subject } from 'rxjs';
   styleUrls: ['./image-gallery.component.scss'],
 })
 export class ImageGalleryComponent implements OnInit {
-  private eventsSubject: Subject<void> = new Subject<void>();
-  imagesList: Image[];
+  imagesList: Image[] = [];
+  @ViewChild(SearchComponent) searchComponent :SearchComponent;
 
   updateResults(results:SearchResult){
-    this.imagesList = results.photos.photo;
+    this.imagesList = this.imagesList.concat(results.photos.photo);
   }
 
   onScrollDown(){
-    this.eventsSubject.next();
+    this.searchComponent.subscribeTosearch();
   }
 
   onScrollUp(){
@@ -25,6 +26,7 @@ export class ImageGalleryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imagesList = [];
   }
 
 }

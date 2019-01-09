@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ImageSearchService } from '../services/image-search.service';
 import { SearchResult } from '../shared/search-result';
 import { FormControl } from '@angular/forms';
@@ -12,8 +12,9 @@ import { debounceTime, distinctUntilChanged, switchMap, startWith, map } from 'r
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  searchControl:FormControl;
+  searchControl: FormControl;
   searchTerm$ = new BehaviorSubject<string>('');
+  page = 0;
   
   @Input() scrollEvent:Observable<Number>;
   @Output() onSearchResults = new EventEmitter<SearchResult>();
@@ -27,30 +28,25 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.searchControl = new FormControl();
     this.subscribeTosearch();
-    this.subscribeToScroll();
   }
 
-  private subscribeTosearch(page:Number=1){
-    this.getImages(this.searchTerm$,page)
+ subscribeTosearch(){
+    this.getImages(this.searchTerm$)
             .subscribe(results => {
               this.saveResults(this.searchTerm$.value,results);
               this.onSearchResults.emit(results);
     });
   }
 
-  getImages(searchTerms:Observable<string>,page:Number): Observable<SearchResult>{
+ private getImages(searchTerms:Observable<string>): Observable<SearchResult>{
     return (searchTerms)
      .pipe(debounceTime(400),
        distinctUntilChanged(),
-        switchMap((term,page) => this.imageSearchService.getImages(term,page)));
+        switchMap((term) => this.imageSearchService.getImages(term,this.page)));
   }
 
   private saveResults(key:string, data:SearchResult){
     this.persistenceService.save(key,data);
-  }
-
-  private subscribeToScroll(){
-  
   }
 
 }
