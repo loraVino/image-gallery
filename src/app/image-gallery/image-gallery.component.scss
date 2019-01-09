@@ -1,6 +1,7 @@
 .container{
     width: 80%;
     margin: 0 auto;
+
 }
 
 .image-container{
@@ -15,6 +16,7 @@
     column-count: 5;
     column-gap: 2px;
     row-gap: 2px;
+    margin: 20px 0;
 }
 
 @media (max-width: 1200px) {

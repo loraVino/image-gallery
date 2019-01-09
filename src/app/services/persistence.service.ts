@@ -9,24 +9,24 @@ export class PersistenceService {
   constructor() { }
 
   save(key: string, data: any): void {
-    try{
-      if(key && key.trim().length > 0){
+    try {
+      if (key && key.trim().length > 0) {
         localStorage.removeItem(key);
         localStorage.setItem(key, JSON.stringify(data));
       }
     }
-    catch(error){
+    catch (error) {
       console.log(error);
     }
   }
 
   getPersistedData(key: string): SearchResult {
-    try{
+    try {
       if (localStorage.getItem(key)) {
         return JSON.parse(localStorage.getItem(key));
       }
     }
-    catch(error){
+    catch (error) {
       console.log(error);
     }
     return new SearchResult();

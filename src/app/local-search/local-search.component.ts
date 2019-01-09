@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PersistenceService } from '../services/persistence.service';
 import { FormControl } from '@angular/forms';
 import { SearchResult } from '../shared/search-result';
@@ -23,36 +23,40 @@ export class LocalSearchComponent implements OnInit {
     this.updateOptions();
   }
 
-  updateOptions(){
+  updateOptions(): void {
     this.options = this.persistenceService.getPersistedKeys();
   }
 
-  add() {
+  add(): void {
     this.inputs.push(new FormControl());
   }
 
-  remove(toRemove: FormControl) {
+  remove(toRemove: FormControl): void {
     this.inputs = this.inputs.filter((input) => input != toRemove);
   }
 
-  search(value: string): void {
+  search(searchMode: string): void {
     let searchResult: SearchResult = new SearchResult();
-    let searchTerms: string[] = this.inputs.filter((input) => input.value).map((input) => input.value);
-    let results: SearchResult[];
+    let searchTerms: string[] = this.getSearchTerms();
+    let allResults: SearchResult[];
     let photosFlatArray: Image[] = [];
     searchResult.photos = new ResultContent();
 
     if (searchTerms.length > 0) {
-      results = this.getAllResults(searchTerms);
-      if (value === 'AND') {
-        photosFlatArray = this.searchIntersection(results);
+      allResults = this.getAllResults(searchTerms);
+      if (searchMode === 'AND') {
+        photosFlatArray = this.searchIntersection(allResults);
       }
       else {
-        photosFlatArray = this.unionResults(results);
+        photosFlatArray = this.unionResults(allResults);
       }
+      searchResult.photos.photo = photosFlatArray;
+      this.onSearchResults.emit(searchResult);
     }
-    searchResult.photos.photo = photosFlatArray;
-    this.onSearchResults.emit(searchResult);
+  }
+
+  private getSearchTerms() {
+    return this.inputs.filter((input) => input.value).map((input) => input.value);
   }
 
   private getAllResults(terms: string[]): SearchResult[] {

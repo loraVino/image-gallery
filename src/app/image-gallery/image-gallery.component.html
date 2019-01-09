@@ -1,36 +1,23 @@
 <div class="container">
   <mat-accordion>
-      <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Search flickr api
-            </mat-panel-title>
-            <mat-panel-description>
-              Type to search images from flickr api
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-search (onSearchResults)='updateResults($event)' #searchControl></app-search>
-        </mat-expansion-panel> 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Search the local gallery
-              </mat-panel-title>
-              <mat-panel-description>
-                Type to search images from previous searches
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <app-local-search  
-            (onSearchResults)='updateResults($event)'></app-local-search>
-          </mat-expansion-panel> 
-  </mat-accordion>   
-  
-  <div class="image-container"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollUpDistance]="1.5"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="onScrollDown()"
-  (scrolledUp)="onScrollUp()">
-  <app-image-gallery-item  *ngFor="let image of imagesList" [image]="image"></app-image-gallery-item> 
-</div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Search flickr api
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-search (onSearchResults)='updateResults($event)' #searchControl></app-search>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Search previous search results
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-local-search (onSearchResults)='updateResults($event)'></app-local-search>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="image-container">
+    <app-image-gallery-item *ngFor="let image of imagesList" [image]="image"></app-image-gallery-item>
+  </div>

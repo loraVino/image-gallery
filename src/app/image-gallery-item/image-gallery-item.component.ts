@@ -7,8 +7,8 @@ import { Image } from '../shared/image';
   styleUrls: ['./image-gallery-item.component.scss']
 })
 export class ImageGalleryItemComponent implements OnInit {
-  @Input() image:Image;
-  url:String;
+  @Input() image: Image;
+  url: String;
 
   constructor() { }
 
@@ -16,10 +16,10 @@ export class ImageGalleryItemComponent implements OnInit {
     this.url = this.buildUrl();
   }
 
-  buildUrl(){
-    return "https://farm" + this.image.farm + 
-    ".staticflickr.com/"+ this.image.server +
-    "/" + this.image.id +"_" +
-     this.image.secret + ".jpg"
+  private buildUrl() {
+    return "https://farm" + this.image.farm +
+      ".staticflickr.com/" + this.image.server +
+      "/" + this.image.id + "_" +
+      this.image.secret + ".jpg"
   }
 }
