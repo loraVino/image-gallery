@@ -16,13 +16,13 @@ export class ImageSearchService {
   constructor(private http: HttpClient) {
   }
 
-  getImages(term: string): Observable<SearchResult> {
-    let url = this.constructUrl(term);
+  getImages(term: string,page:number): Observable<SearchResult> {
+    let url = this.constructUrl(term,page);
     return this.http.get<SearchResult>(url)
       .pipe(catchError(this.handleError<SearchResult>('getImages', new SearchResult())));
   }
 
-  private constructUrl(text: string): string {
+  private constructUrl(text: string,page:number): string {
     return this.BASE_URL + "?method=flickr.photos.search" +
       "&safe_search=1" +
       "&format=json" +
@@ -31,7 +31,7 @@ export class ImageSearchService {
       "&content_type=1" +
       "&is_getty=1" +
       "&text=" + text +
-      "&page=1";
+      "&page="+page;
   }
 
   handleError<T>(method = 'method', result?: T) {

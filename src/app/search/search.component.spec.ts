@@ -65,7 +65,7 @@ describe('SearchComponent', () => {
 
       searchInput.triggerEventHandler('keyup', { 'target': { 'value': searchValue } });
       tick(400);
-      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue);
+      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue,1);
     }));
 
     it('keyup should save results', fakeAsync(() => {
@@ -92,7 +92,7 @@ describe('SearchComponent', () => {
       searchInput.triggerEventHandler('keyup', { 'target': { 'value': searchValue } });
 
       tick(400);
-      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue);
+      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue,1);
       expect(mockSearchService.getImages).not.toHaveBeenCalledWith('va');
     }));
 
@@ -107,11 +107,9 @@ describe('SearchComponent', () => {
       searchInput.triggerEventHandler('keyup', { 'target': { 'value': searchValue } });
 
       tick(400);
-      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue);
+      expect(mockSearchService.getImages).toHaveBeenCalledWith(searchValue,1);
       expect(mockSearchService.getImages).not.toHaveBeenCalledWith('ba');
     }));
-
-
   });
 
 });

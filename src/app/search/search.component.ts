@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
     return (searchTerms)
       .pipe(debounceTime(400),
         distinctUntilChanged(),
-        switchMap((term) => this.imageSearchService.getImages(term)));
+        switchMap((term) => this.imageSearchService.getImages(term,1)));
   }
 
   private saveResults(key: string, data: SearchResult) {

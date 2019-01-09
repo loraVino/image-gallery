@@ -36,7 +36,7 @@ describe('ImageSearchService', () => {
   describe('getImages', () => {
 
     it('should return images', () => {
-      searchService.getImages(searchTerm).subscribe((response: any) => {
+      searchService.getImages(searchTerm,1).subscribe((response: any) => {
         expect(response).toBe('../assets/test/mockResponse.json');
       });
       let request = httpMock.expectOne(url);
@@ -47,7 +47,7 @@ describe('ImageSearchService', () => {
     });
 
     it('should return empty response on error', () => {
-      searchService.getImages(searchTerm).subscribe((response: any) => {
+      searchService.getImages(searchTerm,1).subscribe((response: any) => {
         expect(response).toBe(new SearchResult());
 
         let request = httpMock.expectOne(url);

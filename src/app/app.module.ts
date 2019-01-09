@@ -18,7 +18,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -43,8 +43,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatExpansionModule,
     MatButtonModule,
     MatListModule,
-    MatToolbarModule
-  ],
+    MatToolbarModule,
+    InfiniteScrollModule
+    ],
   exports: [],
   providers: [],
   bootstrap: [AppComponent]

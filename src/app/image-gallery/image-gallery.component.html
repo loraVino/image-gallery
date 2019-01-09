@@ -18,6 +18,10 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="image-container">
+  <div class="image-container"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()">
     <app-image-gallery-item *ngFor="let image of imagesList" [image]="image"></app-image-gallery-item>
   </div>
